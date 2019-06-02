@@ -7,9 +7,10 @@ body {
   margin: 16px;
   max-width: 740px;
   margin: 50px auto;
+  @import %container;
 }
 
-.container {
+%container {
   text-align: center;
 }
 

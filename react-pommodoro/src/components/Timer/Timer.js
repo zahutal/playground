@@ -1,4 +1,6 @@
 import React from 'react';
+import styles from '../../App.module.css';
+
 
 const Timer = (props) =>  {
 
@@ -16,7 +18,7 @@ const Timer = (props) =>  {
 
   return (
     <div>
-      <time className="timeLeft">{toHHMMSS(props.timeLeft)}</time>
+      <time className={styles.timeLeft}>{toHHMMSS(props.timeLeft)}</time>
     </div>
   )
 
