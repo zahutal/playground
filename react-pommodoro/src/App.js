@@ -2,7 +2,6 @@ import React from 'react';
 import pommodoro from './img/pommodoro.png'; 
 import Timer from './components/Timer/Timer.js';
 import styles from './App.module.css';
-import classNames from 'classnames';
 
 class Pommodoro extends React.Component {
   constructor(props) {
@@ -81,10 +80,6 @@ class Pommodoro extends React.Component {
 
   render() {
 
-    let c_startButton = classNames({
-        'button':true,
-        'start':true
-    })
 
     return (
       <div className={styles.Pommodoro}>
@@ -98,29 +93,32 @@ class Pommodoro extends React.Component {
             alt="Pommodoro timer" />
         </figure>
 
-        <p>{this.state.timerMode.charAt(0).toUpperCase() + this.state.timerMode.slice(1)} time left: </p>
+        <p className={styles.subtitle}>{this.state.timerMode.toUpperCase() } time left: </p>
+
+
         <Timer timeLeft={this.state.timeLeft} />
-        <p>Ticking: {c_startButton}</p>
 
-        <button
-          className={c_startButton}
-          onClick={ this.startTimer }>
-          start timer</button>
-        <button
-          className={styles.button}
-          onClick={ this.pauseTimer }>
-          pause timer</button>
-        <button
-          className={styles.button}
-          onClick={ this.resetTimer }>
-          reset timer</button>
-        <button
-          className={styles.button}
-          onClick={ this.changeTimerMode }>
-          change mode</button>
+        <div className={styles.buttons__action}>
+          <button
+            className={styles.button__start}
+            onClick={ this.startTimer }>
+            start timer</button>
+          <button
+            className={styles.button__pause}
+            onClick={ this.pauseTimer }>
+            pause timer</button>
+        </div>
 
-
-        <p>mode: {this.state.timerMode}</p>
+        <div className={styles.buttons__option}>
+          <button
+            className={styles.button}
+            onClick={ this.changeTimerMode }>
+            change mode</button>
+          <button
+            className={styles.button}
+            onClick={ this.resetTimer }>
+            reset timer</button>
+        </div>
 
         <ol className={styles.list}><strong>Technika Pomodoro krok po kroku</strong>
 

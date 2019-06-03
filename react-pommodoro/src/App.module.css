@@ -7,10 +7,6 @@ body {
   margin: 16px;
   max-width: 740px;
   margin: 50px auto;
-  @import %container;
-}
-
-%container {
   text-align: center;
 }
 
@@ -29,7 +25,13 @@ body {
 }
 
 .Pommodoro ol {
-  padding: 20px 0;
+  padding: 20px;
+}
+
+.subtitle {
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .timeLeft {
@@ -40,7 +42,14 @@ body {
   padding: 20px;
 }
 
-.button {
+.buttons__action,
+.buttons__option {
+  padding-bottom: 10px;
+}
+
+.button,
+.button__start,
+.button__pause {
   cursor: pointer;
   margin: 5px;
   padding: 5px 10px;
@@ -51,17 +60,24 @@ body {
   border-radius: 5px;
 
   transition: all 0.3s ease-out;
+  background: #fff59e;
 }
 
-.button:hover {
+.button:hover,
+.button__start:hover,
+.button__pause:hover {
   filter: brightness(85%);
 }
 
-.start {
+.button__start,
+.button__pause {
+  padding: 10px 15px;
+}
+
+.button__start {
   background: rgba(144, 238, 144, 1);
 }
 
-.pause {
-  background: yellow;
+.button__pause {
+  background: #ff7060;
 }
-
