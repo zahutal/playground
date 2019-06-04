@@ -1,7 +1,7 @@
 import React from 'react';
 import pommodoro from './img/pommodoro.png'; 
-import Timer from './components/Timer/Timer.js';
 import styles from './App.module.css';
+import Timer from './components/Timer/Timer.js';
 
 class Pommodoro extends React.Component {
   constructor(props) {
@@ -18,48 +18,36 @@ class Pommodoro extends React.Component {
   }
 
   countDown = () => {
-    let current = this.state.timeLeft;
+    let { timeLeft } = this.state;
 
-    if (current > 0) {
-      current--;
-    } else if ( current >= 0) {
-      current = 0;
-      this.pauseTimer();
-    }
-
-    this.updateTimer(current);
-  }
-
-  changeTimerMode = () => {
-    this.pauseTimer();
-
-    if (this.state.timerMode === "work") {
-      this.setState({timerMode: "break"});
-      this.updateTimer(this.state.breakLength);
-    } else if (this.state.timerMode === "break") {
-      this.setState({timerMode: "work"});
-      this.updateTimer(this.state.workLength);
-    }
+    timeLeft--;
+    this.updateTimer(timeLeft);
   }
 
   updateTimer(value) {
+    if (value === 0) {
+      this.playAlert();
+      this.pauseTimer();
+    }
+
     this.setState({timeLeft: value});
   }
 
   startTimer = () => {
-    const interval = () => {
-      this.countDown();
-    }
-
-    let intervalCreate;
-
-    if (!this.state.isTicking) {
-      intervalCreate = setInterval( interval, 1000);
-      this.setState({ isTicking: true });
-      this.setState({ intervalID: intervalCreate });
-    } else {
+    if (this.state.isTicking) {
       console.log("timer already running!");
+      return false;
     }
+
+    const _interval = () => {
+            this.countDown();
+          },
+          _intervalCreate = setInterval( _interval, 1000);
+
+    this.setState({ 
+        isTicking: true,
+        intervalID: _intervalCreate
+    });
   }
 
   pauseTimer = () => {
@@ -68,18 +56,30 @@ class Pommodoro extends React.Component {
   }
 
   resetTimer = () => {
-    this.pauseTimer();
+    const { timerMode } = this.state,
+          newTimeValue = timerMode === 'work' ? this.state.workLength : this.state.breakLength;
 
-    if (this.state.timerMode === "work") {
-      this.updateTimer(this.state.workLength);
-    } else if (this.state.timerMode === "break") {
-      this.updateTimer(this.state.breakLength);
-    }
+    this.pauseTimer();
+    this.updateTimer(newTimeValue);
   }
 
+  changeTimerMode = () => {
+    const { timerMode } = this.state,
+          newLength = timerMode === 'break' ? this.state.workLength : this.state.breakLength;
+
+    this.setState({
+      timerMode: timerMode === 'break' ? 'work' : 'break'
+    })
+
+    this.pauseTimer();
+    this.updateTimer(newLength);
+  }
+
+  playAlert = () => {
+    console.log("TING");
+  }
 
   render() {
-
 
     return (
       <div className={styles.Pommodoro}>
@@ -89,12 +89,13 @@ class Pommodoro extends React.Component {
         <figure>
           <img 
             src={pommodoro}  
-            onClick={ () => this.updateTimer(12) } 
+            onClick={ () => this.updateTimer(3) } 
             alt="Pommodoro timer" />
         </figure>
 
-        <p className={styles.subtitle}>{this.state.timerMode.toUpperCase() } time left: </p>
-
+        <p className={styles.subtitle}>
+          { this.state.timerMode.toUpperCase() } time left: 
+        </p>
 
         <Timer timeLeft={this.state.timeLeft} />
 
@@ -121,24 +122,20 @@ class Pommodoro extends React.Component {
         </div>
 
         <ol className={styles.list}><strong>Technika Pomodoro krok po kroku</strong>
-
           <li>Zrób listę swoich zadań, posortuj ją według ważności.</li>
           <li>Podziel zadania na „pomidory” – czyli na takie kawałki, które da się zrealizować w 25 minut.</li>
           <li>Weź minutnik i ustaw go na 25 minut.</li>
           <li>Zrealizuj pierwsze zadanie nie odrywając się od niego. Nie rób w tym czasie niczego innego, nie odbieraj telefonów, nie sprawdzaj poczty. Rób jedną i tylko jedną rzecz.</li>
           <li>Kiedy timer zadzwoni, zrób 5 minut przerwy i ustaw timer ponownie na 25 minut. Swoje zrealizowane pierwsze zadanie oznacz na liście jako wykonane.</li>
           <li>Po zrealizowaniu 4 zadań – pomidorów zrób dłuższą przerwę, od 15 do 30 minut. Tyle ile potrzebujesz aby odpocząć ( możesz właśnie wtedy sprawdzić pocztę), potem powtórz cały cykl od początku.</li>
-
         </ol>
 
         <ol className={styles.list}><strong>Święte zasady Techniki Pomodoro</strong>
-
           <li>Przerwę możesz zacząć tylko w momencie, kiedy zadzwoni minutnik, nie wcześniej.</li>
           <li>Jeżeli masz zadanie wymagające poświęcenia mu dużej ilości czasu, podziel je na mniejsze części.</li>
           <li>Odwrotnie, jeżeli zadanie jest krótsze niż jeden „pomidor”, dorzuć do niego kolejne krótkie zadanie, aby cały „pomidor” był wypełniony.</li>
           <li>Restrykcyjne stosowanie Techniki Pomodoro nie zawsze jest sensowne. Być może Twoje zadania wymagają 40 minutowych pomidorów, zamiast 25 minut. Może wtedy dla Ciebie lepsza będzie 10 minutowa przerwa. Ty wiesz najlepiej. Dopasuj tę technikę do specyfiki Twojej pracy.</li>
           <li>Nie korzystaj z tej techniki w swoim wolnym czasie. </li>
-
         </ol>
 
       </div>
