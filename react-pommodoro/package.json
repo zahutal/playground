@@ -1,5 +1,6 @@
 {
   "name": "react-pommodoro",
+  "homepage": "http://ulinator.github.io/playground/react-pommodoro",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
