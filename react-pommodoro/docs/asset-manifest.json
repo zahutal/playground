@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0a720bfd.chunk.css",
+    "main.js": "/static/js/main.fea39114.chunk.js",
+    "main.js.map": "/static/js/main.fea39114.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.8fa3d35f.chunk.js": "/static/js/2.8fa3d35f.chunk.js",
+    "static/js/2.8fa3d35f.chunk.js.map": "/static/js/2.8fa3d35f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.c09a97e4eefe8a2fcfcc8e30a042a6e4.js": "/precache-manifest.c09a97e4eefe8a2fcfcc8e30a042a6e4.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.0a720bfd.chunk.css.map": "/static/css/main.0a720bfd.chunk.css.map",
+    "static/media/pommodoro.png": "/static/media/pommodoro.ad8d347b.png"
+  }
+}
