@@ -1,3 +1,12 @@
+My simple pommodoro app.
+
+TODOs:
+
+1. add a ring sound
+2. switch to real Date
+3. add customisable timer values
+4. add some design
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
